@@ -14,7 +14,7 @@ class ProductTest < ActiveSupport::TestCase
   end
 
   test "price must be greater than or equal to 0.01" do
-    product = Product.new(title: "New", description: "Description", image_url: "pic.jpg", price: -1)
+    product = Product.new(title: "a"*10, description: "Description", image_url: "pic.jpg", price: -1)
     assert product.invalid?
     assert "must be greater than or equal to 0.01", product.errors[:price].join('; ')
     product.price = 0
@@ -25,7 +25,7 @@ class ProductTest < ActiveSupport::TestCase
   end
 
   def new_product(image_url)
-    Product.new(title: "New", description: "Description", image_url: image_url, price: 1)
+    Product.new(title: "a"*10, description: "Description", image_url: image_url, price: 1)
   end
 
   test "image_url" do
@@ -46,7 +46,13 @@ class ProductTest < ActiveSupport::TestCase
 
     assert !product.save
     assert_equal "has already been taken", product.errors[:title].join('; ')
+  end
 
+  test "title must have greater than 10 symbols" do
+    product = Product.new(title: "a"*9, description: "New", image_url: "pic.jpg", price: 10)
+    assert product.invalid?
+    product.title = "a"*10
+    assert product.valid?
   end
 
 end
