@@ -8,4 +8,19 @@ class Product < ActiveRecord::Base
             message: 'URL must point to GIT/JPG/PNG pictures'
   }
 
+  has_many :line_items
+
+  before_destroy :ensure_not_referenced_by_any_line_item
+
+  private
+
+  def ensure_not_referenced_by_any_line_item
+    if line_items.empty?
+      true
+    else
+      errors.add(:base, 'line items are exist')
+      false
+    end
+  end
+
 end
