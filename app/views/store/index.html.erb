@@ -3,6 +3,11 @@
 <% end %>
 
 <h1>Your Pragmatic Catalog</h1>
+<% if @count >= 5 %>
+  <div>
+    You have been here <%= pluralize(@count, 'times') %>
+  </div>
+<% end %>
 <% @products.each do |f| %>
   <div class="entry">
     <%= link_to image_tag(f.image_url), f %>
