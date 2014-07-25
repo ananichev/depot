@@ -13,6 +13,12 @@
   </div>
   <div id="columns">
     <div id="side">
+      <% if @cart %>
+        <%= hiden_div_if(@cart.line_items.empty?, id: 'cart') do %>
+          <%= render "/carts/cart_store", object: @cart %>
+        <% end %>
+      <% end %>
+
       <ul>
         <li class="time">Now is <%= Time.now %></li>
         <li></li>

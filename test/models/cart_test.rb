@@ -14,7 +14,7 @@ class CartTest < ActiveSupport::TestCase
     cart = Cart.create
     cart.add_product(products(:ruby).id, products(:ruby).price)
     cart.add_product(products(:ruby).id, products(:ruby).price)
-    p cart.line_items
+    p cart.line_items.product
     assert_equal 1, cart.line_items.find_by_product_id(products(:ruby).id).quantity
   end
 

@@ -2,25 +2,4 @@
   <p id="notice"><%= notice %></p>
 <% end %>
 
-<div class="cart_title">Your cart</div>
-<table>
-  <tr>
-    <td colspan="4" class="sum_of_price">Sum</td>
-  </tr>
-  <% @cart.line_items.each do |f| %>
-    <tr>
-      <td><%= f.quantity %> &times;</td>
-      <td><%= f.product.title %></td>
-      <td class="item_price"><%= number_to_currency(f.price) %></td>
-      <td class="item_price"><%= number_to_currency(f.total_price) %></td>
-      <td><%= button_to  'Remove item', f, method: :delete %></td>
-    </tr>
-  <% end %>
-  <tr class="total_line">
-    <td></td>
-    <td colspan="2">Total</td>
-    <td class="total_cell"><%= number_to_currency(@cart.total_price) %></td>
-  </tr>
-</table>
-
-<%= button_to 'Empty cart', @cart, method: :delete, data: {confirm: "Are you sure?"} %>
+<%= render @cart %>

@@ -1,0 +1,21 @@
+<div class="cart_title">Your cart</div>
+<table>
+  <% @cart.line_items.each do |f| %>
+    <% if f == @current_item %>
+      <tr id="current_item">
+    <% else %>
+      <tr>
+    <% end %>
+    <td><%= link_to "-", decrement_quantity_line_item_path(f) %></td>
+    <td><%= f.quantity %> &times;</td>
+    <td><%= f.product.title %></td>
+    <td class="item_price"><%= number_to_currency(f.total_price) %></td>
+    </tr>
+  <% end %>
+  <tr class="total_line">
+    <td colspan="3">Total</td>
+    <td class="total_cell"><%= number_to_currency(@cart.total_price) %></td>
+  </tr>
+</table>
+
+<%= button_to 'Empty cart', @cart, method: :delete, data: {confirm: "Are you sure?"} %>

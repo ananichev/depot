@@ -1,5 +1,5 @@
 class LineItemsController < ApplicationController
-  before_action :set_line_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_line_item, only: [:show, :edit, :update, :destroy, :decrement_quantity]
 
   # GET /line_items
   # GET /line_items.json
@@ -30,7 +30,8 @@ class LineItemsController < ApplicationController
     respond_to do |format|
       if @line_item.save
         session[:counter] = 0
-        format.html { redirect_to @line_item.cart }
+        format.html { redirect_to store_url }
+        format.js   { @current_item = @line_item }
         format.json { render action: 'show', status: :created, location: @line_item }
       else
         format.html { render action: 'new' }
@@ -63,14 +64,28 @@ class LineItemsController < ApplicationController
     end
   end
 
+  def decrement_quantity
+    if @line_item.quantity > 1
+      @line_item.increment!(:quantity, -1)
+    else
+      @line_item.destroy
+    end
+    respond_to do |format|
+      format.html { redirect_to store_url }
+      format.js   { @current_item = @line_item }
+    end
+  end
+
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_line_item
+  # Use callbacks to share common setup or constraints between actions.
+  def set_line_item
       @line_item = LineItem.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def line_item_params
+  def line_item_params
       params.require(:line_item).permit(:product_id, :cart_id)
     end
+
+
 end
