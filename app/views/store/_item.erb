@@ -1,0 +1,9 @@
+<div class="entry">
+  <%= image_tag(item.image_url) %>
+  <h3><%= item.title %></h3>
+  <%= sanitize(item.description) %>
+  <div class="price_line">
+    <span class="price"><%= number_to_currency(item.price) %></span>
+    <%= button_to t('store.index.add_html'), line_items_path(product_id: item), remote: true %>
+  </div>
+</div>

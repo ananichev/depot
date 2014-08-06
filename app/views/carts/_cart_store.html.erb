@@ -1,4 +1,4 @@
-<div class="cart_title">Your cart</div>
+<div class="cart_title"><%= t('carts.cart.title') %></div>
 <table>
   <% @cart.line_items.each do |f| %>
     <% if f == @current_item %>
@@ -13,9 +13,9 @@
     </tr>
   <% end %>
   <tr class="total_line">
-    <td colspan="3">Total</td>
+    <td colspan="3"><%= t('carts.cart.total') %></td>
     <td class="total_cell"><%= number_to_currency(@cart.total_price) %></td>
   </tr>
 </table>
-<%= button_to 'Checkout', new_order_path, method: :get, class: "checkout" %>
-<%= button_to 'Empty cart', @cart, method: :delete, data: {confirm: "Are you sure?"} %>
+<%= button_to t('carts.cart.checkout'), new_order_path, method: :get, class: "checkout" %>
+<%= button_to t('carts.cart.empty'), @cart, method: :delete, data: {confirm: t('carts.cart.confirm')} %>

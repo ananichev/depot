@@ -113,6 +113,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt-ruby (~> 3.1.2)
   coffee-rails (~> 4.0.0)
+  i18n
   jbuilder (~> 1.2)
   jquery-rails (~> 2.3.0)
   jquery-ui-rails
