@@ -39,6 +39,8 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 
 gem 'i18n'
 
+gem 'debugger'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
